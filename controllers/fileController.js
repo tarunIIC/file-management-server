@@ -7,7 +7,7 @@ const s3 = new AWS.S3();
 class FileController {
     static async uploadJson(req, res) {
         try {
-            const jsonData = { randomNumber: Math.random() };
+            const jsonData = req.body;
 
             const params = {
                 Bucket: process.env.BUCKET,

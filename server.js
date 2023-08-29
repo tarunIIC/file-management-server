@@ -15,7 +15,8 @@ app.use(cors());
 const port = 3000;
 
 // Middleware
-app.use(express.json({ limit: '1kb' }));
+// Todo: Handle error message of PayloadTooLargeError: request entity too large
+app.use(express.json({ limit: '10kb' }));
 app.use(jsonHandler);
 
 //routes
@@ -24,6 +25,10 @@ app.use('/upload-json', uploadJsonRoute);
 app.use('/update-data', updateDataRoute);
 app.use('/protected', protectedRoute);
 app.use('/register', registerRoute)
+
+app.use((err, req, res) => {
+    console.error(err)
+})
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
